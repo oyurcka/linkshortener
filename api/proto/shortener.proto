@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api;
+
+message GetRequest {
+    string shorturl = 1;
+}
+
+message GetResponse {
+    string url = 1;
+}
+
+message CreateRequest {
+    string url = 1;
+}
+
+message CreateResponse {
+    string shorturl = 1;
+}
+
+service Shortener {
+    rpc Get(GetRequest) returns (GetResponse) {}
+    rpc Create(CreateRequest) returns (CreateResponse) {}
+}

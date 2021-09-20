@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+    linkshortener:
+        build: ./
+        command: ./linkshortener
+        ports:
+            - "9080:9080"
+        depends_on: 
+            - postgres-db
+        environment:
+            DEBUG: 'true'
+            PORT: '9080'
+        env_file: 
+          - docker.env
+
+    postgres-db:
+        build: ./postgres-db
+        image: postgres:latest
+        restart: always
+        volumes: 
+            - ./postgres-db/data
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: admin
+            POSTGRES_DB: linkshortener
